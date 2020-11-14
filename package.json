@@ -1,0 +1,58 @@
+{
+  "name": "graphology-traversal",
+  "version": "0.0.1",
+  "description": "Traversal functions for graphology.",
+  "main": "index.js",
+  "files": [
+    "*.d.ts",
+    "index.js",
+    "dfs.js"
+  ],
+  "types": "./index.d.ts",
+  "scripts": {
+    "lint": "eslint '**/*.js'",
+    "prepublish": "npm run lint && npm test",
+    "test": "mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graphology/graphology-traversal.git"
+  },
+  "keywords": [
+    "graph",
+    "graphology",
+    "traversal",
+    "dfs",
+    "bfs"
+  ],
+  "contributors": [
+    {
+      "name": "Guillaume Plique",
+      "url": "http://github.com/Yomguithereal"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/graphology/graphology-traversal/issues"
+  },
+  "homepage": "https://github.com/graphology/graphology-traversal#readme",
+  "devDependencies": {
+    "@yomguithereal/eslint-config": "^4.0.0",
+    "eslint": "^7.13.0",
+    "graphology": "^0.19.2",
+    "graphology-types": "0.19.0",
+    "mocha": "^8.2.1"
+  },
+  "eslintConfig": {
+    "extends": "@yomguithereal/eslint-config",
+    "globals": {
+      "Set": true
+    }
+  },
+  "peerDependencies": {
+    "graphology-types": ">=0.19.0"
+  },
+  "dependencies": {
+    "graphology-utils": "^1.8.0"
+  }
+}
