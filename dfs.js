@@ -21,27 +21,25 @@ module.exports = function dfs(graph, callback) {
 
   var seen = new Set();
   var stack = [];
-  var attrs = [];
-  var n, a;
+  var r, n, a;
 
   function neighborCallback(neighbor, an) {
     if (seen.has(neighbor))
       return;
 
-    stack.push(neighbor);
-    attrs.push(an);
+    stack.push([neighbor, an]);
   }
 
   graph.forEachNode(function(node, attr) {
     if (seen.has(node))
       return;
 
-    stack.push(node);
-    attrs.push(attr);
+    stack.push([node, attr]);
 
     while (stack.length !== 0) {
-      n = stack.pop();
-      a = attrs.pop();
+      r = stack.pop();
+      n = r[0];
+      a = r[1];
 
       seen.add(n);
       callback(n, a);
