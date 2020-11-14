@@ -54,4 +54,4 @@ function dfs(graph, callback) {
   });
 }
 
-module.exports = dfs;
+exports.dfs = dfs;

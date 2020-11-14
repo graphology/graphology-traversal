@@ -8,8 +8,9 @@ var assert = require('assert'),
     mergeStar = require('graphology-utils/merge-star'),
     erdosRenyi = require('graphology-generators/random/erdos-renyi');
 
-var dfs = require('./dfs.js');
-var bfs = require('./bfs.js');
+var lib = require('./index');
+var bfs = lib.bfs;
+var dfs = lib.dfs;
 
 describe('graphology-traversal', function() {
   describe('dfs', function() {

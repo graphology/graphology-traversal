@@ -1,2 +1,2 @@
-export {default as bfs} from './bfs';
-export {default as dfs} from './dfs';
+export * from './bfs';
+export * from './dfs';

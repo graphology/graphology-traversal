@@ -55,4 +55,4 @@ function bfs(graph, callback) {
   });
 }
 
-module.exports = bfs;
+exports.bfs = bfs;
