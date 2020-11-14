@@ -1,3 +1,3 @@
-import Graph, {NodeIterationCallback} from 'graphology-types';
+import Graph, {Attributes, NodeIterationCallback} from 'graphology-types';
 
-export default function dfs(graph: Graph, callback: NodeIterationCallback): void;
+export default function dfs<N extends Attributes = Attributes>(graph: Graph<N>, callback: NodeIterationCallback<N>): void;
