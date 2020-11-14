@@ -5,7 +5,8 @@
 var assert = require('assert'),
     Graph = require('graphology'),
     mergeCycle = require('graphology-utils/merge-cycle'),
-    mergeStar = require('graphology-utils/merge-star');
+    mergeStar = require('graphology-utils/merge-star'),
+    erdosRenyi = require('graphology-generators/random/erdos-renyi');
 
 var dfs = require('./dfs.js');
 var bfs = require('./bfs.js');
@@ -64,6 +65,18 @@ describe('graphology-traversal', function() {
 
       assert.deepStrictEqual(path, ['1', '2', '3', '4', '5']);
     });
+
+    it('should iterate on every node.', function() {
+      var graph = erdosRenyi.sparse(Graph.DirectedGraph, {order: 100, probability: 0.1});
+
+      var path = [];
+
+      dfs(graph, function(node) {
+        path.push(node);
+      });
+
+      assert.deepStrictEqual(new Set(graph.nodes()), new Set(path));
+    });
   });
 
   describe('bfs', function() {
@@ -107,6 +120,18 @@ describe('graphology-traversal', function() {
       });
 
       assert.notDeepStrictEqual(path, dfsPath);
+    });
+
+    it('should iterate on every node.', function() {
+      var graph = erdosRenyi.sparse(Graph.DirectedGraph, {order: 100, probability: 0.1});
+
+      var path = [];
+
+      bfs(graph, function(node) {
+        path.push(node);
+      });
+
+      assert.deepStrictEqual(new Set(graph.nodes()), new Set(path));
     });
   });
 });
