@@ -27,6 +27,7 @@ module.exports = function dfs(graph, callback) {
     if (seen.has(neighbor))
       return;
 
+    seen.add(neighbor);
     stack.push([neighbor, an]);
   }
 
@@ -34,6 +35,7 @@ module.exports = function dfs(graph, callback) {
     if (seen.has(node))
       return;
 
+    seen.add(node);
     stack.push([node, attr]);
 
     while (stack.length !== 0) {
@@ -41,7 +43,6 @@ module.exports = function dfs(graph, callback) {
       n = r[0];
       a = r[1];
 
-      seen.add(n);
       callback(n, a);
 
       graph.forEachOutboundNeighbor(n, neighborCallback);
