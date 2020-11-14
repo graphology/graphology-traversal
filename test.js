@@ -3,7 +3,8 @@
  * ============================
  */
 var assert = require('assert'),
-    Graph = require('graphology');
+    Graph = require('graphology'),
+    mergeCycle = require('graphology-utils/merge-cycle');
 
 var dfs = require('./dfs.js');
 
@@ -47,6 +48,19 @@ describe('graphology-traversal', function() {
       assert.deepStrictEqual(path, [
         '1', '3', '2', '4', '5', '6', '7', '8'
       ]);
+    });
+
+    it('should work with cycles.', function() {
+      var graph = new Graph();
+      mergeCycle(graph, [1, 2, 3, 4, 5]);
+
+      var path = [];
+
+      dfs(graph, function(node) {
+        path.push(node);
+      });
+
+      assert.deepStrictEqual(path, ['1', '2', '3', '4', '5']);
     });
   });
 });
