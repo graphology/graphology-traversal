@@ -19,6 +19,10 @@ module.exports = function dfs(graph, callback) {
   if (typeof callback !== 'function')
     throw new Error('graphology-traversal/dfs: given callback is not a function.');
 
+  // Early termination
+  if (graph.order === 0 || graph.size === 0)
+    return;
+
   var seen = new Set();
   var stack = [];
   var r, n, a;
