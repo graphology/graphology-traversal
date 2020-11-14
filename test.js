@@ -78,6 +78,25 @@ describe('graphology-traversal', function() {
 
       assert.deepStrictEqual(new Set(graph.nodes()), new Set(path));
     });
+
+    it('should produce the expected results with trees.', function() {
+      var graph = new Graph();
+
+      graph.mergeEdge(1, 2);
+      graph.mergeEdge(1, 3);
+      graph.mergeEdge(2, 4);
+      graph.mergeEdge(2, 5);
+      graph.mergeEdge(3, 6);
+      graph.mergeEdge(3, 7);
+
+      var path = [];
+
+      dfs(graph, function(node) {
+        path.push(node);
+      });
+
+      assert.deepStrictEqual(path, ['1', '3', '7', '6', '2', '5', '4']);
+    });
   });
 
   describe('bfs', function() {
@@ -133,6 +152,25 @@ describe('graphology-traversal', function() {
       });
 
       assert.deepStrictEqual(new Set(graph.nodes()), new Set(path));
+    });
+
+    it('should produce the expected results with trees.', function() {
+      var graph = new Graph();
+
+      graph.mergeEdge(1, 2);
+      graph.mergeEdge(1, 3);
+      graph.mergeEdge(2, 4);
+      graph.mergeEdge(2, 5);
+      graph.mergeEdge(3, 6);
+      graph.mergeEdge(3, 7);
+
+      var path = [];
+
+      bfs(graph, function(node) {
+        path.push(node);
+      });
+
+      assert.deepStrictEqual(path, ['1', '2', '3', '4', '5', '6', '7']);
     });
   });
 });
