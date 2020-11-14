@@ -12,14 +12,37 @@ npm install graphology-traversal
 
 ## Usage
 
+* [bfs](#bfs)
 * [dfs](#dfs)
+
+### bfs
+
+Perform a BFS (Breadth-First Search) over the given graph using a callback.
+
+```js
+import {bfs} from 'graphology-traversal';
+// Alternatively, to only load the relevant code
+import {bfs} from 'graphology-traversal/bfs';
+
+bfs(graph, function(node, attr) {
+  console.log(node, attr);
+});
+```
+
+*Arguments*
+
+* **graph** *Graph*: a graphology instance.
+* **callback** *function*: iteration callback taking the traversed node and its attributes.
+
 
 ### dfs
 
-Perform a DFS over the given graph using a callback.
+Perform a DFS (Depth-First Search) over the given graph using a callback.
 
 ```js
 import {dfs} from 'graphology-traversal';
+// Alternatively, to only load the relevant code
+import {dfs} from 'graphology-traversal/dfs';
 
 dfs(graph, function(node, attr) {
   console.log(node, attr);

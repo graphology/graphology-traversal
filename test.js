@@ -4,9 +4,11 @@
  */
 var assert = require('assert'),
     Graph = require('graphology'),
-    mergeCycle = require('graphology-utils/merge-cycle');
+    mergeCycle = require('graphology-utils/merge-cycle'),
+    mergeStar = require('graphology-utils/merge-star');
 
 var dfs = require('./dfs.js');
+var bfs = require('./bfs.js');
 
 describe('graphology-traversal', function() {
   describe('dfs', function() {
@@ -61,6 +63,50 @@ describe('graphology-traversal', function() {
       });
 
       assert.deepStrictEqual(path, ['1', '2', '3', '4', '5']);
+    });
+  });
+
+  describe('bfs', function() {
+
+    it('should throw if given invalid arguments.', function() {
+      assert.throws(function() {
+        bfs(null);
+      }, /graph/);
+
+      assert.throws(function() {
+        bfs(new Graph(), null);
+      }, /function/);
+    });
+
+    it('should traverse the graph correctly.', function() {
+      var graph = new Graph();
+      mergeStar(graph, [1, 2, 3, 4]);
+      mergeStar(graph, [2, 5, 6]);
+      mergeStar(graph, [3, 7, 8]);
+      graph.mergeEdge(4, 8);
+
+      graph.addNode(9, {hello: 'world'});
+
+      var path = [];
+
+      bfs(graph, function(node, attr) {
+        if (node === '9')
+          assert.deepStrictEqual(attr, {hello: 'world'});
+        else
+          assert.deepStrictEqual(attr, {});
+
+        path.push(node);
+      });
+
+      assert.deepStrictEqual(path, ['1', '2', '3', '4', '5', '6', '7', '8', '9']);
+
+      var dfsPath = [];
+
+      dfs(graph, function(node) {
+        dfsPath.push(node);
+      });
+
+      assert.notDeepStrictEqual(path, dfsPath);
     });
   });
 });

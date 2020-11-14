@@ -1,30 +1,31 @@
 /**
- * Graphology DFS
+ * Graphology BFS
  * ===============
  *
- * Depth-First Search traversal function.
+ * Breadth-First Search traversal function.
  */
 var isGraph = require('graphology-utils/is-graph');
+var FixedDeque = require('mnemonist/fixed-deque');
 
 /**
- * DFS traversal in the given graph using a callback function
+ * BFS traversal in the given graph using a callback function
  *
  * @param  {any}     value - Target value.
  * @return {boolean}
  */
-function dfs(graph, callback) {
+function bfs(graph, callback) {
   if (!isGraph(graph))
-    throw new Error('graphology-traversal/dfs: expecting a graphology instance.');
+    throw new Error('graphology-traversal/bfs: expecting a graphology instance.');
 
   if (typeof callback !== 'function')
-    throw new Error('graphology-traversal/dfs: given callback is not a function.');
+    throw new Error('graphology-traversal/bfs: given callback is not a function.');
 
   // Early termination
   if (graph.order === 0 || graph.size === 0)
     return;
 
   var seen = new Set();
-  var stack = [];
+  var queue = new FixedDeque(Array, graph.order);
   var r, n, a;
 
   function neighborCallback(neighbor, an) {
@@ -32,7 +33,7 @@ function dfs(graph, callback) {
       return;
 
     seen.add(neighbor);
-    stack.push([neighbor, an]);
+    queue.push([neighbor, an]);
   }
 
   graph.forEachNode(function(node, attr) {
@@ -40,10 +41,10 @@ function dfs(graph, callback) {
       return;
 
     seen.add(node);
-    stack.push([node, attr]);
+    queue.push([node, attr]);
 
-    while (stack.length !== 0) {
-      r = stack.pop();
+    while (queue.size !== 0) {
+      r = queue.shift();
       n = r[0];
       a = r[1];
 
@@ -54,4 +55,4 @@ function dfs(graph, callback) {
   });
 }
 
-module.exports = dfs;
+module.exports = bfs;
