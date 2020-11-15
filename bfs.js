@@ -48,7 +48,7 @@ function bfs(graph, callback) {
       record = queue.shift();
       depth = record.depth;
 
-      callback(record.node, record.attributes);
+      callback(record.node, record.attributes, depth);
 
       graph.forEachOutboundNeighbor(record.node, neighborCallback);
     }

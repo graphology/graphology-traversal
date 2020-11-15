@@ -97,6 +97,24 @@ describe('graphology-traversal', function() {
 
       assert.deepStrictEqual(path, ['1', '3', '7', '6', '2', '5', '4']);
     });
+
+    it('should expose traversal depth.', function() {
+      var graph = new Graph();
+      mergeCycle(graph, [1, 2, 3, 4]);
+
+      var path = [];
+
+      dfs(graph, function(node, attr, depth) {
+        path.push([node, depth]);
+      });
+
+      assert.deepStrictEqual(path, [
+        ['1', 0],
+        ['2', 1],
+        ['3', 2],
+        ['4', 3]
+      ]);
+    });
   });
 
   describe('bfs', function() {
@@ -171,6 +189,24 @@ describe('graphology-traversal', function() {
       });
 
       assert.deepStrictEqual(path, ['1', '2', '3', '4', '5', '6', '7']);
+    });
+
+    it('should expose traversal depth.', function() {
+      var graph = new Graph();
+      mergeCycle(graph, [1, 2, 3, 4]);
+
+      var path = [];
+
+      bfs(graph, function(node, attr, depth) {
+        path.push([node, depth]);
+      });
+
+      assert.deepStrictEqual(path, [
+        ['1', 0],
+        ['2', 1],
+        ['3', 2],
+        ['4', 3]
+      ]);
     });
   });
 });

@@ -47,7 +47,7 @@ function dfs(graph, callback) {
       record = stack.pop();
       depth = record.depth;
 
-      callback(record.node, record.attributes);
+      callback(record.node, record.attributes, depth);
 
       graph.forEachOutboundNeighbor(record.node, neighborCallback);
     }

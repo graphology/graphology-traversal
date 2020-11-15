@@ -24,16 +24,15 @@ import {bfs} from 'graphology-traversal';
 // Alternatively, to only load the relevant code
 import {bfs} from 'graphology-traversal/bfs';
 
-bfs(graph, function(node, attr) {
-  console.log(node, attr);
+bfs(graph, function(node, attr, depth) {
+  console.log(node, attr, depth);
 });
 ```
 
 *Arguments*
 
 * **graph** *Graph*: a graphology instance.
-* **callback** *function*: iteration callback taking the traversed node and its attributes.
-
+* **callback** *function*: iteration callback taking the traversed node, its attributes and the traversal's depth.
 
 ### dfs
 
@@ -44,12 +43,12 @@ import {dfs} from 'graphology-traversal';
 // Alternatively, to only load the relevant code
 import {dfs} from 'graphology-traversal/dfs';
 
-dfs(graph, function(node, attr) {
-  console.log(node, attr);
+dfs(graph, function(node, attr, depth) {
+  console.log(node, attr, depth);
 });
 ```
 
 *Arguments*
 
 * **graph** *Graph*: a graphology instance.
-* **callback** *function*: iteration callback taking the traversed node and its attributes.
+* **callback** *function*: iteration callback taking the traversed node, its attributes and the traversal's depth.
