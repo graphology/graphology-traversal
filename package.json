@@ -7,7 +7,8 @@
     "*.d.ts",
     "bfs.js",
     "index.js",
-    "dfs.js"
+    "dfs.js",
+    "utils.js"
   ],
   "types": "./index.d.ts",
   "scripts": {

@@ -1,10 +1,11 @@
 /**
- * Graphology DFS
- * ===============
+ * Graphology Traversal DFS
+ * =========================
  *
  * Depth-First Search traversal function.
  */
 var isGraph = require('graphology-utils/is-graph');
+var TraversalRecord = require('./utils').TraversalRecord;
 
 /**
  * DFS traversal in the given graph using a callback function
@@ -25,14 +26,14 @@ function dfs(graph, callback) {
 
   var seen = new Set();
   var stack = [];
-  var r, n, a;
+  var depth, record;
 
-  function neighborCallback(neighbor, an) {
+  function neighborCallback(neighbor, attr) {
     if (seen.has(neighbor))
       return;
 
     seen.add(neighbor);
-    stack.push([neighbor, an]);
+    stack.push(new TraversalRecord(neighbor, attr, depth + 1));
   }
 
   graph.forEachNode(function(node, attr) {
@@ -40,16 +41,15 @@ function dfs(graph, callback) {
       return;
 
     seen.add(node);
-    stack.push([node, attr]);
+    stack.push(new TraversalRecord(node, attr, 0));
 
     while (stack.length !== 0) {
-      r = stack.pop();
-      n = r[0];
-      a = r[1];
+      record = stack.pop();
+      depth = record.depth;
 
-      callback(n, a);
+      callback(record.node, record.attributes);
 
-      graph.forEachOutboundNeighbor(n, neighborCallback);
+      graph.forEachOutboundNeighbor(record.node, neighborCallback);
     }
   });
 }

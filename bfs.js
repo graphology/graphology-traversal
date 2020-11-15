@@ -1,11 +1,12 @@
 /**
- * Graphology BFS
- * ===============
+ * Graphology Traversal BFS
+ * =========================
  *
  * Breadth-First Search traversal function.
  */
 var isGraph = require('graphology-utils/is-graph');
 var FixedDeque = require('mnemonist/fixed-deque');
+var TraversalRecord = require('./utils').TraversalRecord;
 
 /**
  * BFS traversal in the given graph using a callback function
@@ -26,14 +27,14 @@ function bfs(graph, callback) {
 
   var seen = new Set();
   var queue = new FixedDeque(Array, graph.order);
-  var r, n, a;
+  var record, depth;
 
-  function neighborCallback(neighbor, an) {
+  function neighborCallback(neighbor, attr) {
     if (seen.has(neighbor))
       return;
 
     seen.add(neighbor);
-    queue.push([neighbor, an]);
+    queue.push(new TraversalRecord(neighbor, attr, depth + 1));
   }
 
   graph.forEachNode(function(node, attr) {
@@ -41,16 +42,15 @@ function bfs(graph, callback) {
       return;
 
     seen.add(node);
-    queue.push([node, attr]);
+    queue.push(new TraversalRecord(node, attr, 0));
 
     while (queue.size !== 0) {
-      r = queue.shift();
-      n = r[0];
-      a = r[1];
+      record = queue.shift();
+      depth = record.depth;
 
-      callback(n, a);
+      callback(record.node, record.attributes);
 
-      graph.forEachOutboundNeighbor(n, neighborCallback);
+      graph.forEachOutboundNeighbor(record.node, neighborCallback);
     }
   });
 }
