@@ -13,7 +13,9 @@ npm install graphology-traversal
 ## Usage
 
 * [bfs](#bfs)
+* [bfsFromNode](#bfsfromnode)
 * [dfs](#dfs)
+* [dfsFromNode](#bfsfromnode)
 
 ### bfs
 
@@ -34,6 +36,26 @@ bfs(graph, function(node, attr, depth) {
 * **graph** *Graph*: a graphology instance.
 * **callback** *function*: iteration callback taking the traversed node, its attributes and the traversal's depth.
 
+### bfsFromNode
+
+Perform a BFS (Breadth-First Search) over the given graph, starting from the given node, using a callback.
+
+```js
+import {bfsFromNode} from 'graphology-traversal';
+// Alternatively, to only load the relevant code
+import {bfsFromNode} from 'graphology-traversal/bfs';
+
+bfsFromNode(graph, 'node1', function(node, attr, depth) {
+  console.log(node, attr, depth);
+});
+```
+
+*Arguments*
+
+* **graph** *Graph*: a graphology instance.
+* **node** *string|number*: starting node.
+* **callback** *function*: iteration callback taking the traversed node, its attributes and the traversal's depth.
+
 ### dfs
 
 Perform a DFS (Depth-First Search) over the given graph using a callback.
@@ -51,4 +73,24 @@ dfs(graph, function(node, attr, depth) {
 *Arguments*
 
 * **graph** *Graph*: a graphology instance.
+* **callback** *function*: iteration callback taking the traversed node, its attributes and the traversal's depth.
+
+### dfsFromNode
+
+Perform a DFS (Depth-First Search) over the given graph, starting from the given node, using a callback.
+
+```js
+import {dfsFromNode} from 'graphology-traversal';
+// Alternatively, to only load the relevant code
+import {dfsFromNode} from 'graphology-traversal/dfs';
+
+dfsFromNode(graph, 'node1', function(node, attr, depth) {
+  console.log(node, attr, depth);
+});
+```
+
+*Arguments*
+
+* **graph** *Graph*: a graphology instance.
+* **node** *string|number*: starting node.
 * **callback** *function*: iteration callback taking the traversed node, its attributes and the traversal's depth.

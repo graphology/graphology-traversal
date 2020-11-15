@@ -12,6 +12,9 @@ var lib = require('./index');
 var bfs = lib.bfs;
 var dfs = lib.dfs;
 
+var dfsFromNode = lib.dfsFromNode;
+var bfsFromNode = lib.bfsFromNode;
+
 describe('graphology-traversal', function() {
   describe('dfs', function() {
 
@@ -115,6 +118,25 @@ describe('graphology-traversal', function() {
         ['4', 3]
       ]);
     });
+
+    it('should be possible to start from a given node.', function() {
+      var graph = new Graph();
+      mergeCycle(graph, [1, 2, 3, 4]);
+      graph.addNode(5);
+
+      var path = [];
+
+      dfsFromNode(graph, 3, function(node, attr, depth) {
+        path.push([node, depth]);
+      });
+
+      assert.deepStrictEqual(path, [
+        ['3', 0],
+        ['4', 1],
+        ['1', 2],
+        ['2', 3]
+      ]);
+    });
   });
 
   describe('bfs', function() {
@@ -206,6 +228,25 @@ describe('graphology-traversal', function() {
         ['2', 1],
         ['3', 2],
         ['4', 3]
+      ]);
+    });
+
+    it('should be possible to start from a given node.', function() {
+      var graph = new Graph();
+      mergeCycle(graph, [1, 2, 3, 4]);
+      graph.addNode(5);
+
+      var path = [];
+
+      bfsFromNode(graph, 4, function(node, attr, depth) {
+        path.push([node, depth]);
+      });
+
+      assert.deepStrictEqual(path, [
+        ['4', 0],
+        ['1', 1],
+        ['2', 2],
+        ['3', 3]
       ]);
     });
   });
