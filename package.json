@@ -13,7 +13,8 @@
   "types": "./index.d.ts",
   "scripts": {
     "lint": "eslint '**/*.js'",
-    "prepublish": "npm run lint && npm test",
+    "prepublishOnly": "npm run lint && npm test",
+    "prepare": "npm run prepublishOnly",
     "test": "mocha test.js"
   },
   "repository": {
@@ -40,11 +41,11 @@
   "homepage": "https://github.com/graphology/graphology-traversal#readme",
   "devDependencies": {
     "@yomguithereal/eslint-config": "^4.0.0",
-    "eslint": "^7.13.0",
-    "graphology": "^0.19.2",
+    "eslint": "^7.22.0",
+    "graphology": "^0.19.3",
     "graphology-generators": "^0.11.0",
-    "graphology-types": "0.19.0",
-    "mocha": "^8.2.1"
+    "graphology-types": "0.19.2",
+    "mocha": "^8.3.2"
   },
   "eslintConfig": {
     "extends": "@yomguithereal/eslint-config",
@@ -56,7 +57,7 @@
     "graphology-types": ">=0.19.0"
   },
   "dependencies": {
-    "graphology-utils": "^1.8.0",
-    "mnemonist": "^0.38.0"
+    "graphology-utils": "^2.0.0",
+    "mnemonist": "^0.38.3"
   }
 }
