@@ -14,7 +14,6 @@
   "scripts": {
     "lint": "eslint '**/*.js'",
     "prepublishOnly": "npm run lint && npm test",
-    "prepare": "npm run prepublishOnly",
     "test": "mocha test.js"
   },
   "repository": {
