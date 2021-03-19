@@ -137,6 +137,29 @@ describe('graphology-traversal', function() {
         ['2', 3]
       ]);
     });
+
+    it('should work when the graph has no edge.', function() {
+      var graph = new Graph();
+
+      graph.addNode('0');
+      graph.addNode('1');
+
+      var path = new Set();
+
+      dfs(graph, function(node) {
+        path.add(node);
+      });
+
+      assert.deepStrictEqual(path, new Set(['0', '1']));
+
+      path = new Set();
+
+      dfsFromNode(graph, '0', function(node) {
+        path.add(node);
+      });
+
+      assert.deepStrictEqual(path, new Set(['0']));
+    });
   });
 
   describe('bfs', function() {
@@ -248,6 +271,29 @@ describe('graphology-traversal', function() {
         ['2', 2],
         ['3', 3]
       ]);
+    });
+
+    it('should work when the graph has no edge.', function() {
+      var graph = new Graph();
+
+      graph.addNode('0');
+      graph.addNode('1');
+
+      var path = new Set();
+
+      bfs(graph, function(node) {
+        path.add(node);
+      });
+
+      assert.deepStrictEqual(path, new Set(['0', '1']));
+
+      path = new Set();
+
+      bfsFromNode(graph, '0', function(node) {
+        path.add(node);
+      });
+
+      assert.deepStrictEqual(path, new Set(['0']));
     });
   });
 });

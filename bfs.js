@@ -22,7 +22,7 @@ function bfs(graph, callback) {
     throw new Error('graphology-traversal/bfs: given callback is not a function.');
 
   // Early termination
-  if (graph.order === 0 || graph.size === 0)
+  if (graph.order === 0)
     return;
 
   var seen = new Set();
@@ -71,7 +71,7 @@ function bfsFromNode(graph, node, callback) {
     throw new Error('graphology-traversal/dfs: given callback is not a function.');
 
   // Early termination
-  if (graph.order === 0 || graph.size === 0)
+  if (graph.order === 0)
     return;
 
   node = '' + node;
