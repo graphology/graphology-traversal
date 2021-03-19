@@ -1,6 +1,6 @@
 {
   "name": "graphology-traversal",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Traversal functions for graphology.",
   "main": "index.js",
   "files": [
